@@ -1,5 +1,6 @@
-Django==4.2.3
 django-extensions==3.2.3
-django-ninja==0.22.2
-python-decouple==3.8
 django-localflavor==4.0
+django-ninja==0.22.2
+django-widget-tweaks==1.4.12
+Django==4.2.3
+python-decouple==3.8

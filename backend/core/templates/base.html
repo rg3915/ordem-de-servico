@@ -20,6 +20,7 @@
   <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body>
+  <div class="container">
   <h1>Menu superior</h1>
   <p>
     <a href="{% url 'servico:ordem_servico_list' %}">Ordens de Serviço</a>
@@ -28,6 +29,7 @@
   {% block content %}
     <p>Parágrafo principal.</p>
   {% endblock content %}
+  </div>
 
   {% block js %}{% endblock js %}
 </body>
