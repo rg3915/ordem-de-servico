@@ -1,57 +1,88 @@
+const data = document.currentScript.dataset
+const csrf = data.csrf
+
 const getData = () => ({
-    items: [
-        {'id': 1, 'servico': 'Alinhamento'},
-        {'id': 2, 'servico': 'Balanceamento'},
-        {'id': 3, 'servico': 'Troca de pneu'},
-    ],
-    clientes: [],
-    cliente: {},
-    clienteSelecionado: {},
-    searchCliente: '',
-    servicos: [],
-    servico: {},
-    servicoSelecionado: {},
-    searchServico: '',
-    ordemServico: {},
+  clientes: [],
+  cliente: {},
+  clienteSelecionado: {},
+  searchCliente: '',
+  servicos: [],
+  servico: {},
+  servicoSelecionado: {},
+  searchServico: '',
+  ordemServico: {},
+  ordemServicoItem: {},
+  currentId: 1,
+  ordemServicoItems: [],
 
-    init(){
-        // watch - monitora as ações
-        this.$watch('searchCliente', (newValue, oldValue) => {
-            if (newValue.length >= 3) {
-                this.getClientes(newValue)
-            }
-        })
-        this.$watch('searchServico', (newValue, oldValue) => {
-            if (newValue.length >= 3) {
-                this.getServicos(newValue)
-            }
-        })
-    },
+  init() {
+    // watch - monitora as ações
+    this.$watch('searchCliente', (newValue, oldValue) => {
+      if (newValue.length >= 3) {
+        this.getClientes(newValue)
+      }
+    })
+    this.$watch('searchServico', (newValue, oldValue) => {
+      if (newValue.length >= 3) {
+        this.getServicos(newValue)
+      }
+    })
+  },
 
-    addItem() {
-        this.items.push({'id': 4, 'servico': ''})
-    },
+  addItem() {
+    // Envia os dados para inserir um novo item na Ordem de Serviço Item,
+    // que por sua vez será retornado na tabela de itens.
+    const servico_id = this.servicoSelecionado.id
+    const servico_titulo = this.servicoSelecionado.titulo
+    const valor = this.ordemServicoItem.valor
+    const proxima_visita = this.ordemServicoItem.proximaVisita
 
-    getClientes(newValue) {
-        const search = newValue
-        fetch(`/api/v1/crm/cliente/?search=${search}`)
-          .then(response => response.json())
-          .then(data => {
-            this.clientes = data
-          })
-    },
+    let ordem_servico_item_id = this.currentId++
+    this.ordemServicoItems.push({ id: ordem_servico_item_id, servico_id, servico_titulo, valor, proxima_visita })
+  },
 
-    getCliente(cliente) {
-      this.clienteSelecionado = cliente
-    },
+  deleteOrdemServicoItem(id) {
+    const indexToRemove = this.ordemServicoItems.findIndex(i => i.id == id)
+    this.ordemServicoItems.splice(indexToRemove, 1)
+  },
 
-    getServicos(newValue) {
-        const search = newValue
-        fetch(`/api/v1/servico/servico/?search=${search}`)
-          .then(response => response.json())
-          .then(data => {
-            this.servicos = data
-          })
-    },
+  getClientes(newValue) {
+    const search = newValue
+    fetch(`/api/v1/crm/cliente/?search=${search}`)
+      .then(response => response.json())
+      .then(data => {
+        this.clientes = data
+      })
+  },
+
+  getCliente(cliente) {
+    this.clienteSelecionado = cliente
+  },
+
+  getServicos(newValue) {
+    const search = newValue
+    fetch(`/api/v1/servico/servico/?search=${search}`)
+      .then(response => response.json())
+      .then(data => {
+        this.servicos = data
+      })
+  },
+
+  saveData() {
+    const cliente_id = this.clienteSelecionado.id
+    const situacao = this.ordemServico.situacao
+    const ordem_servico_itens = this.ordemServicoItems
+    const bodyData = { cliente_id, situacao, ordem_servico_itens }
+    fetch('/api/v1/servico/ordem-servico/', {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-CSRFToken": csrf },
+      body: JSON.stringify(bodyData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      // TODO - pode dar um redirect para os detalhes da OrdemServico
+    })
+  },
 
 })

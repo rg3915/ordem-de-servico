@@ -8,7 +8,7 @@
   <h1>Adicionar Ordem de Serviço</h1>
   <h2></h2>
 
-  <form>
+  <form @submit.prevent="saveData">
 
     <!-- busca cliente -->
     <div class="form-group row">
@@ -98,7 +98,7 @@
         class="col-sm-2 col-form-label"
       >Valor</label>
       <div class="col-sm-10">
-        {% render_field form.valor class="form-control" min="0" step="0.01" x-model="ordemServico.valor" %}
+        {% render_field form.valor class="form-control" min="0" step="0.01" x-model="ordemServicoItem.valor" %}
       </div>
     </div>
 
@@ -108,20 +108,24 @@
         class="col-sm-2 col-form-label"
       >Próxima Visita</label>
       <div class="col-sm-10">
-        {% render_field form.proxima_visita class="form-control" x-model="ordemServico.proximaVisita" %}
+        {% render_field form.proxima_visita class="form-control" x-model="ordemServicoItem.proximaVisita" %}
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-sm-10">
-        SUBMIT
         <button
           type="button"
           class="btn btn-primary"
           @click="addItem"
         >Adicionar</button>
+        <button
+          type="submit"
+          class="btn btn-success"
+        >Salvar</button>
       </div>
     </div>
+
   </form>
 
   <table class="table">
@@ -135,15 +139,14 @@
     </thead>
     <tbody>
       <template
-        x-for="item in items"
+        x-for="item in ordemServicoItems"
         :key="item.id"
       >
         <tr>
-          <td x-text="item.id"></td>
-          <td x-text="item.servico">Lavagem</td>
-          <td>120</td>
-          <td>06/07/2023</td>
-          <td class="text-primary">Deletar</td>
+          <td x-text="item.servico_titulo"></td>
+          <td x-text="item.valor"></td>
+          <td x-text="item.proxima_visita"></td>
+          <td class="text-primary" @click="deleteOrdemServicoItem(item.id)">Deletar</td>
         </tr>
       </template>
     </tbody>
@@ -152,5 +155,8 @@
 {% endblock content %}
 
 {% block js %}
-<script src="{% static 'js/servico/servico.js' %}"></script>
+<script
+  src="{% static 'js/servico/servico.js' %}"
+  data-csrf="{{ csrf_token }}"
+></script>
 {% endblock js %}

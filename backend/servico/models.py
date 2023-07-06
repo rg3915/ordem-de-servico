@@ -56,7 +56,7 @@ class OrdemServicoItem(models.Model):
         related_name='ordem_servico_item_servicos',
     )
     valor = models.DecimalField('valor', max_digits=8, decimal_places=2, null=True, blank=True)
-    proxima_visita = models.DateTimeField('Próxima Visita', null=True, blank=True)
+    proxima_visita = models.DateField('Próxima Visita', null=True, blank=True)
 
     class Meta:
         ordering = ('-pk',)  # ordem decrescente, se quiser crescente só tirar o sinal de menos.
