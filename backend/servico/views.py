@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .models import OrdemServico
+
 from .forms import OrdemServicoForm
+from .models import OrdemServico
 
 
 def ordem_servico_list(request):

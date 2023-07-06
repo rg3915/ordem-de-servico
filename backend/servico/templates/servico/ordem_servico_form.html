@@ -4,159 +4,159 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div x-data="getData">
-  <h1>Adicionar Ordem de Serviço</h1>
-  <h2></h2>
+  <div x-data="getData">
+    <h1>Adicionar Ordem de Serviço</h1>
+    <h2></h2>
 
-  <form @submit.prevent="saveData">
+    <form @submit.prevent="saveData">
 
     <!-- busca cliente -->
-    <div class="form-group row">
-      <label
-        for=""
-        class="col-sm-2 col-form-label"
-      >Cliente</label>
-      <div class="col-sm-10">
+      <div class="form-group row">
+        <label
+          for=""
+          class="col-sm-2 col-form-label"
+        >Cliente</label>
+        <div class="col-sm-10">
         <!-- manual -->
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Cliente"
-          x-model="searchCliente"
-        >
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Cliente"
+            x-model="searchCliente"
+          >
+        </div>
+        <p x-text="searchCliente"></p>
       </div>
-      <p x-text="searchCliente"></p>
-    </div>
 
     <!-- resultado cliente -->
-    <ul class="list-group">
-      <template
-        x-for="cliente in clientes"
-        :key="cliente.id"
-      >
-        <li
-          class="list-group-item"
-          x-text="cliente.razao_social"
-          @click="getCliente(cliente)"
-        ></li>
-      </template>
-    </ul>
+      <ul class="list-group">
+        <template
+          x-for="cliente in clientes"
+          :key="cliente.id"
+        >
+          <li
+            class="list-group-item"
+            x-text="cliente.razao_social"
+            @click="getCliente(cliente)"
+          ></li>
+        </template>
+      </ul>
 
-    <p x-text="clienteSelecionado.id"></p>
+      <p x-text="clienteSelecionado.id"></p>
 
-    <div class="form-group row">
-      <label
-        for=""
-        class="col-sm-2 col-form-label"
-      >Situação</label>
-      <div class="col-sm-10">
+      <div class="form-group row">
+        <label
+          for=""
+          class="col-sm-2 col-form-label"
+        >Situação</label>
+        <div class="col-sm-10">
         <!-- widget_tweaks -->
-        {% render_field form.situacao class="form-control" x-model="ordemServico.situacao" %}
+          {% render_field form.situacao class="form-control" x-model="ordemServico.situacao" %}
+        </div>
       </div>
-    </div>
 
-    <p>Endereço: <span x-text="clienteSelecionado.endereco"></span></p>
-    <p>Bairro: <span x-text="clienteSelecionado.bairro"></span></p>
+      <p>Endereço: <span x-text="clienteSelecionado.endereco"></span></p>
+      <p>Bairro: <span x-text="clienteSelecionado.bairro"></span></p>
 
     <!-- busca servico -->
-    <div class="form-group row">
-      <label
-        for=""
-        class="col-sm-2 col-form-label"
-      >Serviço</label>
-      <div class="col-sm-10">
+      <div class="form-group row">
+        <label
+          for=""
+          class="col-sm-2 col-form-label"
+        >Serviço</label>
+        <div class="col-sm-10">
         <!-- manual -->
-        <input
-          type="text"
-          class="form-control"
-          placeholder="servico"
-          x-model="searchServico"
-        >
+          <input
+            type="text"
+            class="form-control"
+            placeholder="servico"
+            x-model="searchServico"
+          >
+        </div>
+        <p x-text="searchServico"></p>
       </div>
-      <p x-text="searchServico"></p>
-    </div>
 
     <!-- resultado servico -->
-    <ul class="list-group">
-      <template
-        x-for="servico in servicos"
-        :key="servico.id"
-      >
-        <li
-          class="list-group-item"
-          x-text="servico.titulo"
-          @click="servicoSelecionado = servico"
-        ></li>
-      </template>
-    </ul>
+      <ul class="list-group">
+        <template
+          x-for="servico in servicos"
+          :key="servico.id"
+        >
+          <li
+            class="list-group-item"
+            x-text="servico.titulo"
+            @click="servicoSelecionado = servico"
+          ></li>
+        </template>
+      </ul>
 
-    <p x-text="servicoSelecionado.id"></p>
+      <p x-text="servicoSelecionado.id"></p>
 
-    <div class="form-group row">
-      <label
-        for=""
-        class="col-sm-2 col-form-label"
-      >Valor</label>
-      <div class="col-sm-10">
-        {% render_field form.valor class="form-control" min="0" step="0.01" x-model="ordemServicoItem.valor" %}
+      <div class="form-group row">
+        <label
+          for=""
+          class="col-sm-2 col-form-label"
+        >Valor</label>
+        <div class="col-sm-10">
+          {% render_field form.valor class="form-control" min="0" step="0.01" x-model="ordemServicoItem.valor" %}
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label
-        for=""
-        class="col-sm-2 col-form-label"
-      >Próxima Visita</label>
-      <div class="col-sm-10">
-        {% render_field form.proxima_visita class="form-control" x-model="ordemServicoItem.proximaVisita" %}
+      <div class="form-group row">
+        <label
+          for=""
+          class="col-sm-2 col-form-label"
+        >Próxima Visita</label>
+        <div class="col-sm-10">
+          {% render_field form.proxima_visita class="form-control" x-model="ordemServicoItem.proximaVisita" %}
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <div class="col-sm-10">
-        <button
-          type="button"
-          class="btn btn-primary"
-          @click="addItem"
-        >Adicionar</button>
-        <button
-          type="submit"
-          class="btn btn-success"
-        >Salvar</button>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="addItem"
+          >Adicionar</button>
+          <button
+            type="submit"
+            class="btn btn-success"
+          >Salvar</button>
+        </div>
       </div>
-    </div>
 
-  </form>
+    </form>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Descrição (Serviço)</th>
-        <th>Valor</th>
-        <th>Próx. Visita</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <template
-        x-for="item in ordemServicoItems"
-        :key="item.id"
-      >
+    <table class="table">
+      <thead>
         <tr>
-          <td x-text="item.servico_titulo"></td>
-          <td x-text="item.valor"></td>
-          <td x-text="item.proxima_visita"></td>
-          <td class="text-primary" @click="deleteOrdemServicoItem(item.id)">Deletar</td>
+          <th>Descrição (Serviço)</th>
+          <th>Valor</th>
+          <th>Próx. Visita</th>
+          <th>Ações</th>
         </tr>
-      </template>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <template
+          x-for="item in ordemServicoItems"
+          :key="item.id"
+        >
+          <tr>
+            <td x-text="item.servico_titulo"></td>
+            <td x-text="item.valor"></td>
+            <td x-text="item.proxima_visita"></td>
+            <td class="text-primary" @click="deleteOrdemServicoItem(item.id)">Deletar</td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
 {% endblock content %}
 
 {% block js %}
-<script
-  src="{% static 'js/servico/servico.js' %}"
-  data-csrf="{{ csrf_token }}"
-></script>
+  <script
+    src="{% static 'js/servico/servico.js' %}"
+    data-csrf="{{ csrf_token }}"
+  ></script>
 {% endblock js %}

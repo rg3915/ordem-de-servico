@@ -1,4 +1,5 @@
 from ninja import NinjaAPI
+
 from backend.crm.crm_api import router as crm_router
 from backend.servico.servico_api import router as servico_router
 

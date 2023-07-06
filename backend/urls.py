@@ -4,7 +4,6 @@ from ninja import NinjaAPI
 
 from .api import api
 
-
 urlpatterns = [
     path('', include('backend.core.urls', namespace='core')),
     # path('crm/', include('backend.crm.urls', namespace='crm')),

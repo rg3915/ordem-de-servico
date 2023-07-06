@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Servico, OrdemServico, OrdemServicoItem
+from .models import OrdemServico, OrdemServicoItem, Servico
 
 
 class OrdemServicoItemInline(admin.TabularInline):

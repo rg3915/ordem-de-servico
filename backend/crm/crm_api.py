@@ -1,4 +1,5 @@
 from typing import List
+
 from ninja import Router
 from ninja.orm import create_schema
 

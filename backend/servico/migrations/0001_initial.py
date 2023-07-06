@@ -17,8 +17,10 @@ class Migration(migrations.Migration):
             name='OrdemServico',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('situacao', models.CharField(choices=[('pe', 'Pendente'), ('ca', 'Cancelado'), ('an', 'Andamento'), ('ap', 'Aprovado')], max_length=2, verbose_name='Situação')),
-                ('cliente', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='ordem_servicos', to='crm.cliente', verbose_name='cliente')),
+                ('situacao', models.CharField(choices=[('pe', 'Pendente'), ('ca', 'Cancelado'),
+                 ('an', 'Andamento'), ('ap', 'Aprovado')], max_length=2, verbose_name='Situação')),
+                ('cliente', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+                 related_name='ordem_servicos', to='crm.cliente', verbose_name='cliente')),
             ],
             options={
                 'verbose_name': 'ordem de serviço',
@@ -44,8 +46,10 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('valor', models.DecimalField(blank=True, decimal_places=2, max_digits=8, null=True, verbose_name='valor')),
                 ('proxima_visita', models.DateTimeField(blank=True, null=True, verbose_name='Próxima Visita')),
-                ('ordem_servico', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ordem_servico_itens', to='servico.ordemservico', verbose_name='ordem de serviço')),
-                ('servico', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ordem_servico_item_servicos', to='servico.servico', verbose_name='serviço')),
+                ('ordem_servico', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='ordem_servico_itens', to='servico.ordemservico', verbose_name='ordem de serviço')),
+                ('servico', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='ordem_servico_item_servicos', to='servico.servico', verbose_name='serviço')),
             ],
             options={
                 'verbose_name': 'ordem de serviço',

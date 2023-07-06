@@ -12,7 +12,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='ordemservicoitem',
-            options={'ordering': ('-pk',), 'verbose_name': 'item da ordem de serviço', 'verbose_name_plural': 'itens da ordens de serviço'},
+            options={'ordering': ('-pk',), 'verbose_name': 'item da ordem de serviço',
+                     'verbose_name_plural': 'itens da ordens de serviço'},
         ),
         migrations.AlterField(
             model_name='ordemservicoitem',

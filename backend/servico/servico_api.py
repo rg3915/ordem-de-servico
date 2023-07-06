@@ -1,13 +1,13 @@
-from django.shortcuts import get_object_or_404
-from typing import List
-from ninja import Router
-from ninja.orm import create_schema
-from ninja import Schema
-from decimal import Decimal
-from backend.servico.models import Servico, OrdemServico, OrdemServicoItem
-from backend.crm.models import Cliente
 from datetime import date
+from decimal import Decimal
+from typing import List
 
+from django.shortcuts import get_object_or_404
+from ninja import Router, Schema
+from ninja.orm import create_schema
+
+from backend.crm.models import Cliente
+from backend.servico.models import OrdemServico, OrdemServicoItem, Servico
 
 router = Router()
 
