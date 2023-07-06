@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 from backend.core.models import Endereco
 
@@ -14,3 +15,6 @@ class Cliente(Endereco):
 
     def __str__(self):
         return f'{self.razao_social}'
+
+    def get_absolute_url(self):
+        return reverse_lazy('crm:cliente_detail', kwargs={'pk': self.pk})

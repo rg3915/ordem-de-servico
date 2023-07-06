@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Lista de Clientes</h1>
+
+  <a href="{% url 'crm:cliente_create' %}" class="btn btn-primary">Adicionar</a>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Razão Social</th>
+            <th>CNPJ</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for object in object_list %}
+            <tr>
+              <td>
+                <a href="{{ object.get_absolute_url }}">{{ object.razao_social }}</a>
+              </td>
+              <td>{{ object.cnpj }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock content %}

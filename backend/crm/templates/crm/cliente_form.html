@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+  <div x-data>
+    <h1>Adicionar Cliente</h1>
+
+    <div class="row">
+      <div class="cols">
+        <form
+          action="."
+          method="POST"
+        >
+          {% csrf_token %}
+
+          {% for field in form.visible_fields %}
+            <div class="form-group">
+              <label for="{{ field.label }}">{{ field.label }}</label>
+              {% render_field field class="form-control" %}
+
+              {% if field.errors %}
+                {% for error in field.errors %}
+                  <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          {% endfor %}
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >Salvar</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

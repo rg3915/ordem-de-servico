@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Detalhes do Cliente: {{ object.razao_social }}</h1>
+
+  <a
+    href="{% url 'crm:cliente_list' %}"
+    class="btn btn-link mb-3"
+  >Voltar</a>
+  <a
+    href="{% url 'crm:cliente_create' %}"
+    class="btn btn-primary mb-3"
+  >Adicionar</a>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="list-group">
+        <a
+          href="#"
+          class="list-group-item list-group-item-action flex-column align-items-start"
+        >
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Razão Social</h5>
+          <!-- <small class="text-muted">3 days ago</small> -->
+          </div>
+          <p class="mb-1">{{ object.razao_social }}</p>
+          <small class="text-muted">{{ object.cnpj }}</small>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
