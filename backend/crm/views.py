@@ -13,6 +13,7 @@ from .models import Cliente
 
 class ClienteListView(ListView):
     model = Cliente
+    paginate_by = 50
 
     def get_queryset(self):
         qs = self.model.objects.all()
