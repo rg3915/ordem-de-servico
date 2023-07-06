@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -12,6 +13,17 @@ from .models import Cliente
 
 class ClienteListView(ListView):
     model = Cliente
+
+    def get_queryset(self):
+        qs = self.model.objects.all()
+        search = self.request.GET.get('search')
+        if search:
+            qs = qs.filter(
+                Q(razao_social__icontains=search)
+                | Q(bairro__icontains=search)
+                | Q(cidade__icontains=search)
+            )
+        return qs
 
 
 class ClienteDetailView(DetailView):
