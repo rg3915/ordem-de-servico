@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -11,26 +12,32 @@
 
   <!-- Bootstrap core CSS -->
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
 
   <!-- Font-awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Alpine.js -->
     <script src="//unpkg.com/alpinejs" defer></script>
+
   </head>
-  <body>
-    <div class="container">
-      <h1>Menu superior</h1>
-      <p>
-        <a href="{% url 'servico:ordem_servico_list' %}">Ordens de Serviço</a>
-      </p>
 
-      {% block content %}
-        <p>Parágrafo principal.</p>
-      {% endblock content %}
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% include "includes/menu.html" %}
+
+        {% block content %}{% endblock content %}
+      </div>
     </div>
+  </div>
 
-    {% block js %}{% endblock js %}
-  </body>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+
 </html>
