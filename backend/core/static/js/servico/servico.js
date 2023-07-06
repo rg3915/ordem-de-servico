@@ -14,15 +14,19 @@ const getData = () => ({
   ordemServicoItem: {},
   currentId: 1,
   ordemServicoItems: [],
+  clienteShow: false,
+  servicoShow: false,
 
   init() {
     // watch - monitora as ações
     this.$watch('searchCliente', (newValue, oldValue) => {
+      if (!newValue) this.clientes = []
       if (newValue.length >= 3) {
         this.getClientes(newValue)
       }
     })
     this.$watch('searchServico', (newValue, oldValue) => {
+      if (!newValue) this.servicos = []
       if (newValue.length >= 3) {
         this.getServicos(newValue)
       }
@@ -52,11 +56,13 @@ const getData = () => ({
       .then(response => response.json())
       .then(data => {
         this.clientes = data
+        this.clienteShow = true
       })
   },
 
   getCliente(cliente) {
     this.clienteSelecionado = cliente
+    this.clienteShow = false
   },
 
   getServicos(newValue) {
@@ -65,7 +71,13 @@ const getData = () => ({
       .then(response => response.json())
       .then(data => {
         this.servicos = data
+        this.servicoShow = true
       })
+  },
+
+  getServico(servico) {
+    this.servicoSelecionado = servico
+    this.servicoShow = false
   },
 
   saveData() {
@@ -74,16 +86,16 @@ const getData = () => ({
     const ordem_servico_itens = this.ordemServicoItems
     const bodyData = { cliente_id, situacao, ordem_servico_itens }
     fetch('/api/v1/servico/ordem-servico/', {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "X-CSRFToken": csrf },
-      body: JSON.stringify(bodyData),
-    })
-    .then(response => response.json())
-    .then(data => {
-      // redirect para os detalhes da OrdemServico
-      const ordem_servico_id = data.ordem_servico_id
-      window.location.href = `/servico/${ordem_servico_id}/`
-    })
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-CSRFToken": csrf },
+        body: JSON.stringify(bodyData),
+      })
+      .then(response => response.json())
+      .then(data => {
+        // redirect para os detalhes da OrdemServico
+        const ordem_servico_id = data.ordem_servico_id
+        window.location.href = `/servico/${ordem_servico_id}/`
+      })
   },
 
 })

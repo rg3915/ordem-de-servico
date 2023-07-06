@@ -3,6 +3,13 @@
 {% load static %}
 {% load widget_tweaks %}
 
+{% block css %}
+  <link
+    rel="stylesheet"
+    href="{% static 'css/autocomplete.css' %}"
+  >
+{% endblock css %}
+
 {% block content %}
   <div x-data="getData">
     <h1>Adicionar Ordem de Serviço</h1>
@@ -11,7 +18,7 @@
     <form @submit.prevent="saveData">
 
     <!-- busca cliente -->
-      <div class="form-group row">
+      <div class="form-group row autocomplete">
         <label
           for=""
           class="col-sm-2 col-form-label"
@@ -24,25 +31,40 @@
             placeholder="Cliente"
             x-model="searchCliente"
           >
+          <ul
+            id="id_ul"
+            x-ref="clienteList"
+            :class="{ 'clienteShow': clienteShow, 'clienteHide': !clienteShow }"
+          >
+            <template
+              x-for="cliente in clientes"
+              :key="cliente.id"
+            >
+              <li
+                x-text="cliente.razao_social"
+                @click="getCliente(cliente)"
+              ></li>
+            </template>
+          </ul>
         </div>
-        <p x-text="searchCliente"></p>
+      <!-- <p x-text="searchCliente"></p> -->
       </div>
 
     <!-- resultado cliente -->
-      <ul class="list-group">
-        <template
-          x-for="cliente in clientes"
-          :key="cliente.id"
-        >
-          <li
-            class="list-group-item"
-            x-text="cliente.razao_social"
-            @click="getCliente(cliente)"
-          ></li>
-        </template>
-      </ul>
+    <!-- <ul class="list-group">
+      <template
+        x-for="cliente in clientes"
+        :key="cliente.id"
+      >
+        <li
+          class="list-group-item"
+          x-text="cliente.razao_social"
+          @click="getCliente(cliente)"
+        ></li>
+      </template>
+    </ul> -->
 
-      <p x-text="clienteSelecionado.id"></p>
+    <!-- <p x-text="clienteSelecionado.id"></p> -->
 
       <div class="form-group row">
         <label
@@ -59,7 +81,7 @@
       <p>Bairro: <span x-text="clienteSelecionado.bairro"></span></p>
 
     <!-- busca servico -->
-      <div class="form-group row">
+      <div class="form-group row autocomplete">
         <label
           for=""
           class="col-sm-2 col-form-label"
@@ -72,25 +94,26 @@
             placeholder="servico"
             x-model="searchServico"
           >
+          <ul
+            id="id_ul"
+            x-ref="servicoList"
+            :class="{ 'servicoShow': servicoShow, 'servicoHide': !servicoShow }"
+          >
+            <template
+              x-for="servico in servicos"
+              :key="servico.id"
+            >
+              <li
+                x-text="servico.titulo"
+                @click="getServico(servico)"
+              ></li>
+            </template>
+          </ul>
         </div>
         <p x-text="searchServico"></p>
       </div>
 
-    <!-- resultado servico -->
-      <ul class="list-group">
-        <template
-          x-for="servico in servicos"
-          :key="servico.id"
-        >
-          <li
-            class="list-group-item"
-            x-text="servico.titulo"
-            @click="servicoSelecionado = servico"
-          ></li>
-        </template>
-      </ul>
-
-      <p x-text="servicoSelecionado.id"></p>
+    <!-- <p x-text="servicoSelecionado.id"></p> -->
 
       <div class="form-group row">
         <label
@@ -146,7 +169,10 @@
             <td x-text="item.servico_titulo"></td>
             <td x-text="item.valor"></td>
             <td x-text="item.proxima_visita"></td>
-            <td class="text-primary" @click="deleteOrdemServicoItem(item.id)">Deletar</td>
+            <td
+              class="text-primary"
+              @click="deleteOrdemServicoItem(item.id)"
+            >Deletar</td>
           </tr>
         </template>
       </tbody>

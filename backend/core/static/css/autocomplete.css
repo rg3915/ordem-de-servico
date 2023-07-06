@@ -1,0 +1,38 @@
+.autocomplete {
+  position: relative;
+}
+
+#id_ul {
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+  background: white;
+  position: absolute;
+  z-index: 1;
+}
+
+#id_ul li {
+  width: 100%;
+  margin: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+#id_ul li:hover {
+  background: #f5f5f5;
+}
+.clienteShow {
+  display: block;
+}
+.clienteHide {
+  display: none;
+}
+.servicoShow {
+  display: block;
+}
+.servicoHide {
+  display: none;
+}
