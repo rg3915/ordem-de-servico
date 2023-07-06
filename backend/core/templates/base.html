@@ -21,6 +21,9 @@
 </head>
 <body>
   <h1>Menu superior</h1>
+  <p>
+    <a href="{% url 'servico:ordem_servico_list' %}">Ordens de Serviço</a>
+  </p>
 
   {% block content %}
     <p>Parágrafo principal.</p>
