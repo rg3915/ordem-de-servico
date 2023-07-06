@@ -1,5 +1,6 @@
 from datetime import date
 from decimal import Decimal
+from http import HTTPStatus
 from typing import List
 
 from django.shortcuts import get_object_or_404
@@ -69,4 +70,4 @@ def create_ordem_servico(request, payload: OrdemServicoSchemaIn):
             proxima_visita=proxima_visita,
         )
 
-    return {'status': 'ok'}
+    return HTTPStatus.CREATED
