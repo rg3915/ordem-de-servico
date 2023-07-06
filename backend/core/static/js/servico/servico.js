@@ -80,8 +80,9 @@ const getData = () => ({
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
-      // TODO - pode dar um redirect para os detalhes da OrdemServico
+      // redirect para os detalhes da OrdemServico
+      const ordem_servico_id = data.ordem_servico_id
+      window.location.href = `/servico/${ordem_servico_id}/`
     })
   },
 

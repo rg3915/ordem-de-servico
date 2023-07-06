@@ -38,3 +38,18 @@ python manage.py createsuperuser
 https://alpinejs.dev
 
 https://django-ninja.rest-framework.com
+
+## Videos
+
+[A Essência do Django parte 1](https://youtu.be/mlaCLGItR7Q)
+
+[A Essência do Django parte 2](https://youtu.be/Qu2QTxdYfZ4)
+
+[FBV vs CBV](https://www.youtube.com/live/2qZcPb8ZWQA?feature=share)
+
+[Class Based Views](https://www.youtube.com/live/C7Ecugxa7ic?feature=share) tem Login simples também.
+
+[Django-ninja](https://youtu.be/4RdTltDCfl0)
+
+[AlpineJS](https://www.youtube.com/watch?v=rqH70WZhKcc&list=PLsGCdfxkV9urAmKLmU5j_gshYXeEwzFpu)
+

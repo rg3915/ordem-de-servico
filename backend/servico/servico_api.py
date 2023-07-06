@@ -42,6 +42,7 @@ def list_servico(request, search=None):
 @router.post('ordem-servico/')
 def create_ordem_servico(request, payload: OrdemServicoSchemaIn):
     data = payload.dict()
+
     situacao = data.get('situacao')
     cliente_id = data.get('cliente_id')
 
@@ -70,4 +71,7 @@ def create_ordem_servico(request, payload: OrdemServicoSchemaIn):
             proxima_visita=proxima_visita,
         )
 
-    return HTTPStatus.CREATED
+    return {
+        'ordem_servico_id': ordem_servico.pk,
+        'status': HTTPStatus.CREATED
+    }

@@ -35,7 +35,7 @@ class OrdemServico(models.Model):
     )
 
     class Meta:
-        ordering = ('situacao',)
+        ordering = ('-pk',)
         verbose_name = 'ordem de serviço'
         verbose_name_plural = 'ordens de serviço'
 
