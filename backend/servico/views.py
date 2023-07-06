@@ -7,6 +7,11 @@ from .models import OrdemServico
 def ordem_servico_list(request):
     template_name = 'servico/ordem_servico_list.html'
     object_list = OrdemServico.objects.all()
+
+    search = request.GET.get('search')
+    if search:
+        object_list = object_list.filter(situacao=search)
+
     context = {'object_list': object_list}
     return render(request, template_name, context)
 

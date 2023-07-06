@@ -9,24 +9,64 @@
     class="btn btn-primary"
   >Adicionar</a>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Num</th>
-        <th>Cliente</th>
-        <th>Situação</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for object in object_list %}
-        <tr>
-          <td>{{ object.pk }}</td>
-          <td>
-            <a href="{% url 'servico:ordem_servico_detail' object.pk %}">{{ object.cliente }}</a>
-          </td>
-          <td>{{ object.get_situacao_display }}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="row mt-3">
+    <div class="col-sm-2">
+      <h3>Situação</h3>
+      <div class="list-group">
+        <a
+          href="{% url 'servico:ordem_servico_list' %}"
+          class="list-group-item list-group-item-action"
+        >
+          Limpar filtro
+        </a>
+        <a
+          href="{% url 'servico:ordem_servico_list' %}?search=pe"
+          class="list-group-item list-group-item-action"
+        >
+          Pendente
+        </a>
+        <a
+          href="{% url 'servico:ordem_servico_list' %}?search=ca"
+          class="list-group-item list-group-item-action"
+        >
+          Cancelado
+        </a>
+        <a
+          href="{% url 'servico:ordem_servico_list' %}?search=an"
+          class="list-group-item list-group-item-action"
+        >
+          Andamento
+        </a>
+        <a
+          href="{% url 'servico:ordem_servico_list' %}?search=ap"
+          class="list-group-item list-group-item-action"
+        >
+          Aprovado
+        </a>
+      </div>
+
+    </div>
+    <div class="col-sm-10">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Num</th>
+            <th>Cliente</th>
+            <th>Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for object in object_list %}
+            <tr>
+              <td>{{ object.pk }}</td>
+              <td>
+                <a href="{% url 'servico:ordem_servico_detail' object.pk %}">{{ object.cliente }}</a>
+              </td>
+              <td>{{ object.get_situacao_display }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 {% endblock content %}
