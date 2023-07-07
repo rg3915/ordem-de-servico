@@ -33,8 +33,7 @@
           >
           <ul
             id="id_ul"
-            x-ref="clienteList"
-            :class="{ 'clienteShow': clienteShow, 'clienteHide': !clienteShow }"
+            x-show="clienteShow"
           >
             <template
               x-for="cliente in clientes"
@@ -96,8 +95,7 @@
           >
           <ul
             id="id_ul"
-            x-ref="servicoList"
-            :class="{ 'servicoShow': servicoShow, 'servicoHide': !servicoShow }"
+            x-show="servicoShow"
           >
             <template
               x-for="servico in servicos"

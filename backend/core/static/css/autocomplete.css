@@ -24,15 +24,3 @@
 #id_ul li:hover {
   background: #f5f5f5;
 }
-.clienteShow {
-  display: block;
-}
-.clienteHide {
-  display: none;
-}
-.servicoShow {
-  display: block;
-}
-.servicoHide {
-  display: none;
-}
