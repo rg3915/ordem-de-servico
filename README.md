@@ -15,7 +15,8 @@
 * Rode as migrações.
 
 ```
-git clone https://gitlab.com/rg3915/ordem-de-servico.git
+git clone https://github.com/rg3915/ordem-de-servico.git
+# git clone https://gitlab.com/rg3915/ordem-de-servico.git
 cd ordem-de-servico
 
 python -m venv .venv
